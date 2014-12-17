@@ -178,6 +178,7 @@ function stack() {
 
   function keydown() {
     var delta;
+    if (document.activeElement.contentEditable === 'true') return;  // Allow arrow nav in editable content
     switch (d3.event.keyCode) {
       case 39: // right arrow
       if (d3.event.metaKey) return;
