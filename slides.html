@@ -4,31 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <title>React L&L</title>
-    <style>
-        @import url(http://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i);
-
-        body { color: #aaa; font-family: 'PT Serif'; font-weight: bold; -webkit-font-smoothing: antialiased; }
-        section { background: #000; padding: 1em 3em; overflow: hidden; }
-        a, a:visited { color: #429cb2; }
-        h1,h2,h3,h4 { color: #eee; }
-        h1 { font-size:2em; margin:2em 0 0.5em; }
-        h2 { font-size:1.3em; }
-        ul > li { margin-bottom:0.4em; }
-        .indent { margin-left: 2em; }
-        .subhead { font-style:italic; }
-        blockquote { font-style:italic; background:#15151a; margin: 1rem 0; padding:2rem; }
-        pre > code { display: block; padding: 0.5em 1em; overflow: auto; font-size:0.7em; line-height:1.4; }
-        code { background:#15151a; padding:4px; }
-        code.clickable { cursor:pointer; position: relative; border-right: 4px solid #429cb2; }
-        code.clickable:before {
-            content:'Double-click to run'; color: black; background:#429cb2; opacity:0.6; padding:0 1em;
-            position:absolute; top:0; right:0; font-family:'PT Serif'; font-size:0.6em;
-        }
-        code.finished { border-color:#55ee77; }
-        code.finished:before { content: 'Complete'; background: #55ee77; }
-        .output { background:#444; padding:0.8em 0.5em 0.5em; position:relative; }
-        .output:before { content:'OUTPUT:'; position:absolute; top:5px; line-height:0.8; left:5px; font-size:1rem; color:#000; }
-    </style>
+    <link rel="stylesheet" href="deck.css" type="text/css" media="screen">
 </head>
 <body>
     <section>
@@ -107,39 +83,13 @@ React.render(Greeting(), container)
         </ul>
     </section>
 
+
+    <!-- libs for this specific presentation -->
+    <script src="react.0.12.js"></script>
+
     <!-- Using https://github.com/mbostock/stack/ -->
     <script src="d3.v3.js"></script>
     <script src="stack.v1.js"></script>
-
-    <script src="react.0.12.js"></script>
-
-    <script>
-        var mystack = stack()
-
-        var $ = function(query) {
-            return [].slice.call(document.querySelectorAll(query));
-        };
-
-        // Get all code blocks in the presentation and either eval their code,
-        // or make the code runnable when the code is clicked:
-        $('pre > code').forEach(function(el) {
-            (function(codeTag) {
-                if (codeTag.classList.contains('norun')) {
-                    // Do nothing
-                } else if (codeTag.classList.contains('predefine')) {
-                    var code = codeTag.innerText;
-                    eval(code);
-                } else {
-                    codeTag.classList.add('clickable');
-                    codeTag.addEventListener('dblclick', function(evt) {
-                        var code = codeTag.innerText;
-                        eval(code);
-                        codeTag.classList.add('finished');
-                        setTimeout(function() { codeTag.classList.remove('finished'); }, 7000);
-                    })
-                }
-            }(el))
-        });
-    </script>
+    <script src="deck.js"></script> <!-- personal script customizations -->
 </body>
 </html>

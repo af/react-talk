@@ -1,0 +1,25 @@
+
+@import url(http://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i);
+
+body { color: #aaa; font-family: 'PT Serif'; font-weight: bold; -webkit-font-smoothing: antialiased; }
+section { background: #000; padding: 1em 3em; overflow: hidden; }
+a, a:visited { color: #429cb2; }
+h1,h2,h3,h4 { color: #eee; }
+h1 { font-size:2em; margin:2em 0 0.5em; }
+h2 { font-size:1.3em; }
+ul > li { margin-bottom:0.4em; }
+.indent { margin-left: 2em; }
+.subhead { font-style:italic; }
+blockquote { font-style:italic; background:#15151a; margin: 1rem 0; padding:2rem; }
+pre > code { display: block; padding: 0.5em 1em; overflow: auto; font-size:0.7em; line-height:1.4; }
+code { background:#15151a; padding:4px; }
+code.clickable { cursor:pointer; position: relative; border-right: 4px solid #429cb2; }
+code.clickable:before {
+    content:'Double-click to run'; color: black; background:#429cb2; opacity:0.6; padding:0 1em;
+    position:absolute; top:0; right:0; font-family:'PT Serif'; font-size:0.6em;
+}
+code.finished { border-color:#55ee77; }
+code.finished:before { content: 'Complete'; background: #55ee77; }
+.output { background:#444; padding:0.8em 0.5em 0.5em; position:relative; }
+.output:before { content:'OUTPUT:'; position:absolute; top:5px; line-height:0.8; left:5px; font-size:1rem; color:#000; }
+
