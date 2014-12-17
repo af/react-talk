@@ -15,7 +15,7 @@ pre > code { display: block; padding: 0.5em 1em; overflow: auto; font-size:0.7em
 code { background:#15151a; padding:4px; }
 code.clickable { cursor:pointer; position: relative; border-right: 4px solid #429cb2; }
 code.clickable:before {
-    content:'Double-click to run'; color: black; background:#429cb2; opacity:0.6; padding:0 1em;
+    content:'Right-click to run'; color: black; background:#429cb2; opacity:0.6; padding:0 1em;
     position:absolute; top:0; right:0; font-family:'PT Serif'; font-size:0.6em;
 }
 code.finished { border-color:#55ee77; }

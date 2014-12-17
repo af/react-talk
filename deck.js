@@ -15,7 +15,8 @@ $('pre > code').forEach(function(el) {
             eval(code);
         } else {
             codeTag.classList.add('clickable');
-            codeTag.addEventListener('dblclick', function(evt) {
+            codeTag.addEventListener('contextmenu', function(evt) {
+                evt.preventDefault();
                 var code = codeTag.innerText;
                 eval(code);
                 codeTag.classList.add('finished');
