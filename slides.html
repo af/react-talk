@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>React L&L</title>
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i);
+
+        body { color: #aaa; font-family: 'PT Serif'; font-weight: bold; -webkit-font-smoothing: antialiased; }
+        section { background: #000; padding: 1em 3em; overflow: hidden; }
+        a, a:visited { color: #429cb2; }
+        h1,h2,h3,h4 { color: #eee; }
+        h1 { font-size:2em; margin:2em 0 0.5em; }
+        h2 { font-size:1.3em; }
+        ul > li { margin-bottom:0.4em; }
+        .indent { margin-left: 2em; }
+        .subhead { font-style:italic; }
+        blockquote { font-style:italic; background:#15151a; margin: 1rem 0; padding:2rem; }
+        pre > code { display: block; padding: 0.5em 1em; overflow: auto; font-size:0.7em; line-height:1.4; }
+        code { background:#15151a; padding:4px; }
+        code.clickable { cursor:pointer; position: relative; border-right: 4px solid #429cb2; }
+        code.clickable:before {
+            content:'Double-click to run'; color: black; background:#429cb2; opacity:0.6; padding:0 1em;
+            position:absolute; top:0; right:0; font-family:'PT Serif'; font-size:0.6em;
+        }
+        code.finished { border-color:#55ee77; }
+        code.finished:before { content: 'Complete'; background: #55ee77; }
+        .output { background:#444; padding:0.8em 0.5em 0.5em; position:relative; }
+        .output:before { content:'OUTPUT:'; position:absolute; top:5px; line-height:0.8; left:5px; font-size:1rem; color:#000; }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>React.js</h1>
+        <p class="subhead">Reelhouse lunch &amp; learn, 2014-12-19</p>
+    </section>
+
+    <section>
+        <h2>Outline/todo</h2>
+        * What is React?
+          * not a framework
+            * "V" in MVC
+          * component based
+          * virtual DOM
+        * Example
+          * (runnable code)
+        * Components
+          * declarative DOM
+          * local state
+          * components are basically functions. Data in, DOM out
+          * re-render on every change
+            * virtual DOM means this is FAST
+        * event handling
+          * React handles top-level event delegation by default
+          * cross-browser event support back to IE8
+          * note! camel-cased event names (eg. "onChange" instead of onchange)
+        * Templates mixed in your view code?
+          * Actually makes sense for dynamic UI
+          * "Keep things that have to change together as close together in the code as possible"
+          * see http://www.slideshare.net/floydophone/react-preso-v2
+          * Nothing outside of a component needs to know about its UI internals
+            * possible exception: CSS
+        * State vs Props
+        * Data flow
+          * callbacks
+        * JSX
+          * quasi-html language embedded in your js
+          * JSnoX
+        * Server rendering!
+          * no phantomjs required :P
+          * just use react.renderToString() instead of react.render()
+        * Flux
+          * TODO: image
+          * Facebook's frontend architecture (alternative to MVC)
+          * One-way data flow
+        * Immutable data
+          * a concept from the functional programming world
+          * can give you really impressive performance with React
+          * "undo for free"
+          * swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs
+          * https://github.com/facebook/immutable-js
+    </section>
+
+    <section>
+        <h2>Simplest Possible Component</h2>
+        <div class="output ex1_output"></div>
+        <pre><code contenteditable>var Greeting = React.createClass({
+    render: function() {
+        return React.DOM.div({}, 'hi')
+    }
+})
+var container = $('.ex1_output')[0]
+React.render(Greeting(), container)
+</code></pre>
+    </section>
+
+    <section>
+        <h2>References &amp; recommended reading</h2>
+        <ul>
+            <li>
+                <a href="http://www.slideshare.net/floydophone/react-preso-v2">Rethinking Best Practices</a>
+            </li>
+            <li>
+                <a href="http://buildwithreact.com/">Build with React</a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Using https://github.com/mbostock/stack/ -->
+    <script src="d3.v3.js"></script>
+    <script src="stack.v1.js"></script>
+
+    <script src="react.0.12.js"></script>
+
+    <script>
+        var mystack = stack()
+
+        var $ = function(query) {
+            return [].slice.call(document.querySelectorAll(query));
+        };
+
+        // Get all code blocks in the presentation and either eval their code,
+        // or make the code runnable when the code is clicked:
+        $('pre > code').forEach(function(el) {
+            (function(codeTag) {
+                if (codeTag.classList.contains('norun')) {
+                    // Do nothing
+                } else if (codeTag.classList.contains('predefine')) {
+                    var code = codeTag.innerText;
+                    eval(code);
+                } else {
+                    codeTag.classList.add('clickable');
+                    codeTag.addEventListener('dblclick', function(evt) {
+                        var code = codeTag.innerText;
+                        eval(code);
+                        codeTag.classList.add('finished');
+                        setTimeout(function() { codeTag.classList.remove('finished'); }, 7000);
+                    })
+                }
+            }(el))
+        });
+    </script>
+</body>
+</html>
