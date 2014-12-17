@@ -13,54 +13,17 @@
     </section>
 
     <section>
-        <h2>Outline/todo</h2>
-        * What is React?
-          * not a framework
-            * "V" in MVC
-          * component based
-          * virtual DOM
-        * Example
-          * (runnable code)
-        * Components
-          * declarative DOM
-          * local state
-          * components are basically functions. Data in, DOM out
-          * re-render on every change
-            * virtual DOM means this is FAST
-        * event handling
-          * React handles top-level event delegation by default
-          * cross-browser event support back to IE8
-          * note! camel-cased event names (eg. "onChange" instead of onchange)
-        * Templates mixed in your view code?
-          * Actually makes sense for dynamic UI
-          * "Keep things that have to change together as close together in the code as possible"
-          * see http://www.slideshare.net/floydophone/react-preso-v2
-          * Nothing outside of a component needs to know about its UI internals
-            * possible exception: CSS
-        * State vs Props
-        * Data flow
-          * callbacks
-        * JSX
-          * quasi-html language embedded in your js
-          * JSnoX
-        * Server rendering!
-          * no phantomjs required :P
-          * just use react.renderToString() instead of react.render()
-        * Flux
-          * TODO: image
-          * Facebook's frontend architecture (alternative to MVC)
-          * One-way data flow
-        * Immutable data
-          * a concept from the functional programming world
-          * can give you really impressive performance with React
-          * "undo for free"
-          * swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs
-          * https://github.com/facebook/immutable-js
+        <h2>What is React?</h2>
+        <ul>
+            <li>Not an MVC framework</li>
+            <li class="indent">Can be thought of as a View layer</li>
+            <li>Uses "Components" as its central abstraction</li>
+            <li>Implements a Virtual DOM for clean, performant UI</li>
+        </ul>
     </section>
 
     <section>
         <h2>Simplest Possible Component</h2>
-        <div class="output ex1_output"></div>
         <pre><code contenteditable>var Greeting = React.createClass({
     render: function() {
         return React.DOM.div({}, 'hi')
@@ -69,16 +32,155 @@
 var container = $('.ex1_output')[0]
 React.render(Greeting(), container)
 </code></pre>
+        <div class="output ex1_output"></div>
+    </section>
+
+    <section>
+        <h2>What's a Component? </h2>
+        Re-usable UI element with:
+        <ul>
+            <li>Declarative DOM output from its <code>render()</code> method</li>
+            <li>Re-rendering on every change</li>
+                <li class="indent">virtual DOM means this can be <i>fast</i>– only hits real DOM when necessary</li>
+            <li>Browser Event handling (onclick etc)</li>
+            <li>(Optionally) local state</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Templates mixed in your view code?</h2>
+        <ul>
+            <li>Actually makes sense for dynamic UI</li>
+            <li>Great argument in
+                <a href="http://www.slideshare.net/floydophone/react-preso-v2">this deck</a>
+            </li>
+            <li>"Keep things that have to change together as close together in the code as possible"</li>
+            <li>Nothing outside of a component needs to know about its UI internals</li>
+            <li class="indent">Possible exception: CSS</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Event Handling</h2>
+        <ul>
+            <li>React handles top-level event delegation for you</li>
+            <li>Cross-browser event support back to IE8</li>
+            <li>Note! camel-cased event names</li>
+            <li class="indent">eg. "onChange" instead of "onchange"</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Simple Events Example</h2>
+        <pre><code contenteditable>var ClickCounter = React.createClass({
+    getInitialState: function() {
+        return { clicks: 0 }
+    },
+    handleClick: function(evt) {
+        this.setState({ clicks: this.state.clicks + 1 })
+    },
+    render: function() {
+        var text = this.state.clicks + ' clicks'
+        return React.DOM.button({ onClick: this.handleClick }, text)
+    }
+})
+var container = $('.events_output')[0]
+React.render(ClickCounter(), container)
+</code></pre>
+        <div class="output events_output"></div>
+    </section>
+
+    <section>
+        <h2>State vs Props</h2>
+        <ul>
+            <li>State &amp; Props are the 2 types of data in React UIs</li>
+            <li>Props: passed down from parent components</li>
+            <li>Like attributes on html tags</li>
+            <li>State: local to the component (can pass down to its children)</li>
+            <li class="indent"><code>setState()</code> triggers a re-render</li>
+            <li class="intent">You just saw an example</li>
+            <li class="indent"><code>setState()</code> triggers a re-render</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Props Example</h2>
+        <pre><code contenteditable>var CustomButton = React.createClass({
+    getDefaultProps: function() {
+        return { name: 'do something' }
+    },
+    render: function() {
+        return React.DOM.button({}, this.props.name)
+    }
+})
+var container = $('.props_output')[0]
+React.render(CustomButton({ name: 'asdf' }), container)
+</code></pre>
+        <div class="output props_output"></div>
+    </section>
+
+    <section>
+        <h2>Data Flow</h2>
+        <ul>
+            <li>By default, parents pass data to their child components via props</li>
+            <li>Can also pass callback functions as a way for children to "talk back"</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>JSX</h2>
+        <ul>
+            <li>You've probably seen the quasi-html language embedded in React examples</li>
+            <li>Just use <a href="https://github.com/af/JSnoX">JSnoX</a> instead ;^)</li>
+            <li>Some people actually really like JSX</li>
+            <li class="indent">Being "designer friendly" is an often-cited reason</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Server-side Rendering</h2>
+        <ul>
+            <li>Super easy, no PhantomJS instance required :P</li>
+            <li>Just use react.renderToString() instead of react.render() </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Extra credit, part I: Flux</h2>
+          * TODO: image
+        <ul>
+            <li>Facebook's frontend architecture (alternative to MVC)</li>
+            <li>One-way data flow</li>
+        </ul>
+    </section>
+
+
+    <section>
+        <h2>Extra credit, part II: Immutable Data</h2>
+        <ul>
+            <li>A concept from the functional programming world</li>
+            <li>Can give you really impressive performance with React</li>
+            <li>App-wide Undo for (almost) free</li>
+            <li>Read this <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs">
+                    awesome blog post</a></li>
+            <li>Immutable data structures for JS: https://github.com/facebook/immutable-js</li>
+        </ul>
     </section>
 
     <section>
         <h2>References &amp; recommended reading</h2>
         <ul>
             <li>
+                <a href="facebook.github.io/react/">Official React Docs</a>
+            </li>
+            <li>
                 <a href="http://www.slideshare.net/floydophone/react-preso-v2">Rethinking Best Practices</a>
             </li>
             <li>
                 <a href="http://buildwithreact.com/">Build with React</a>
+            </li>
+            <li>
+                <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs">The future of JS MVCs</a>
             </li>
         </ul>
     </section>
