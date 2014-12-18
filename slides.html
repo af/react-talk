@@ -16,9 +16,10 @@
         <h2>What is React?</h2>
         <ul>
             <li>Not an MVC framework</li>
-            <li class="indent">Can be thought of as a View layer</li>
+            <li class="indent">...but can be used as a view layer</li>
             <li>Uses "Components" as its central abstraction</li>
-            <li>Implements a Virtual DOM for clean, performant UI</li>
+            <li class="indent">Somewhat analogous to Backbone views</li>
+            <li>Uses a Virtual DOM for clean, performant UI</li>
         </ul>
     </section>
 
@@ -105,7 +106,7 @@ React.render(ClickCounter(), container)
 
     <section>
         <h2>Props Example</h2>
-        <pre><code contenteditable>var CustomButton = React.createClass({
+<pre><code contenteditable>var CustomButton = React.createClass({
     getDefaultProps: function() {
         return { name: 'do something' }
     },
@@ -123,12 +124,20 @@ React.render(CustomButton({ name: 'asdf' }), container)
         <h2>Data Flow</h2>
         <ul>
             <li>By default, parents pass data to their child components via props</li>
-            <li>Can also pass callback functions as a way for children to "talk back"</li>
+            <li>Can also pass callback functions as a way to pass data "up"</li>
+            <li>A global event bus is another strategy mentioned in the React docs</li>
         </ul>
     </section>
 
     <section>
         <h2>JSX</h2>
+        <pre><code>
+    ...
+    render: function() {
+        return &lt;div class="foo"&gt;click me: &lt;button&gt;do it&lt;/button&gt;&lt;/div&gt;
+    }
+    ...
+        </code></pre>
         <ul>
             <li>You've probably seen the quasi-html language embedded in React examples</li>
             <li>Just use <a href="https://github.com/af/JSnoX">JSnoX</a> instead ;^)</li>
@@ -141,17 +150,30 @@ React.render(CustomButton({ name: 'asdf' }), container)
         <h2>Server-side Rendering</h2>
         <ul>
             <li>Super easy, no PhantomJS instance required :P</li>
-            <li>Just use react.renderToString() instead of react.render() </li>
+            <li>Just use React.renderToString() instead of React.render() </li>
+            <li>There's also React.renderToStaticMarkup()</li>
         </ul>
+<pre><code contenteditable>var CustomButton = React.createClass({
+    getDefaultProps: function() {
+        return { name: 'do something' }
+    },
+    render: function() {
+        return React.DOM.button({}, this.props.name)
+    }
+})
+
+var html = React.renderToString(CustomButton({ name: 'asdf' }))
+alert(html)
+</code></pre>
     </section>
 
     <section>
         <h2>Extra credit, part I: Flux</h2>
-          * TODO: image
         <ul>
             <li>Facebook's frontend architecture (alternative to MVC)</li>
-            <li>One-way data flow</li>
+            <li>One-way data flow is its defining characteristic</li>
         </ul>
+        <img src="images/flux-diagram-white-background.png" height="500" />
     </section>
 
 

@@ -3,6 +3,7 @@
 
 body { color: #aaa; font-family: 'PT Serif'; font-weight: bold; -webkit-font-smoothing: antialiased; }
 section { background: #000; padding: 1em 3em; overflow: hidden; }
+section img { max-width:100%; }
 a, a:visited { color: #429cb2; }
 h1,h2,h3,h4 { color: #eee; }
 h1 { font-size:2em; margin:2em 0 0.5em; }
@@ -20,6 +21,6 @@ code.clickable:before {
 }
 code.finished { border-color:#55ee77; }
 code.finished:before { content: 'Complete'; background: #55ee77; }
-.output { background:#444; padding:0.8em 0.5em 0.5em; position:relative; }
+.output { background:#333; padding:0.8em 0.5em 0.5em; position:relative; }
 .output:before { content:'OUTPUT:'; position:absolute; top:5px; line-height:0.8; left:5px; font-size:1rem; color:#000; }
 
