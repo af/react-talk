@@ -147,6 +147,24 @@ React.render(CustomButton({ name: 'asdf' }), container)
     </section>
 
     <section>
+        <h2>JSnoX Example</h2>
+<pre><code contenteditable>var d = jsnox(React)
+var JSnoXButton = React.createClass({
+    render: function() {
+        return d('div', [
+            d('div', 'JSnoX example'),
+            'Here is a button:',
+            d('button', this.props.name)
+        ])
+    }
+})
+
+React.render(JSnoXButton({ name: 'asdf' }), $('.jsnox_output')[0])
+</code></pre>
+        <div class="output jsnox_output"></div>
+    </section>
+
+    <section>
         <h2>Server-side Rendering</h2>
         <ul>
             <li>Super easy, no PhantomJS instance required :P</li>
@@ -210,6 +228,7 @@ alert(html)
 
     <!-- libs for this specific presentation -->
     <script src="react.0.12.js"></script>
+    <script src="jsnox.js"></script>
 
     <!-- Using https://github.com/mbostock/stack/ -->
     <script src="d3.v3.js"></script>
